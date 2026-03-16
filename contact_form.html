@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Contact Us Form</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>Contact us</h2>
+
+    <table>
+      <tr>
+        <td>
+          <label for="FirstName">FIRST NAME</label><br>
+          <input type="text" id="FirstName" name="FirstName">
+          <span id="FirstNameError" class="error-msg"></span>
+        </td>
+        <td>
+          <label for="LastName">LAST NAME</label><br>
+          <input type="text" id="LastName" name="LastName">
+          <span id="LastNameError" class="error-msg"></span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label for="Email">EMAIL</label><br>
+          <input type="email" id="Email" name="Email">
+          <span id="EmailError" class="error-msg"></span>
+        </td>
+        <td>
+          <label for="Phone">PHONE NUMBER</label><br>
+          <input type="text" id="Phone" name="Phone">
+          <span id="PhoneError" class="error-msg"></span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <label for="Message">WHAT DO YOU HAVE IN MIND</label><br>
+          <textarea id="Message" name="Message" placeholder="Please enter query..."></textarea>
+          <span id="MessageError" class="error-msg"></span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" class="submit-td">
+          <input type="submit" value="Submit" onclick="collect_data()">
+        </td>
+      </tr>
+    </table>
+
+    <div id="outputSection" class="output-section" style="display:none;">
+      <h3>Submitted Details</h3>
+      <table class="output-table">
+        <tr>
+          <td><strong>First Name</strong></td>
+          <td id="outFirst"></td>
+        </tr>
+        <tr>
+          <td><strong>Last Name</strong></td>
+          <td id="outLast"></td>
+        </tr>
+        <tr>
+          <td><strong>Email</strong></td>
+          <td id="outEmail"></td>
+        </tr>
+        <tr>
+          <td><strong>Phone Number</strong></td>
+          <td id="outPhone"></td>
+        </tr>
+        <tr>
+          <td><strong>Message</strong></td>
+          <td id="outMessage"></td>
+        </tr>
+      </table>
+    </div>
+
+  </div>
+
+</body>
+</html>
