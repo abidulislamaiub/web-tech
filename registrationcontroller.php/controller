@@ -1,0 +1,120 @@
+<?php
+$name = $email = $website = $comment = $gender = "";
+$nameErr = $emailErr = $genderErr = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    // Name Validation using strlen
+    if (isset($_POST["name"])) {
+        $name = $_REQUEST["name"];
+        if (empty($name)) {
+            $nameErr = "Name is required";
+        } elseif (strlen($name) < 5) {
+            $nameErr = "Name must be greater than 5 characters";
+        } else {
+            echo "Name: " . $name . "<br>";
+        }
+    }
+
+    // Email Validation using preg_match
+    if (isset($_POST["email"])) {
+        $email = $_REQUEST["email"];
+        if (empty($email)) {
+            $emailErr = "Email is required";
+        } elseif (!preg_match("/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/", $email)) {
+            $emailErr = "Invalid email format";
+        } else {
+            echo "Email: " . $email . "<br>";
+        }
+    }
+
+    // Website (optional)
+    if (isset($_POST["website"])) {
+        $website = $_REQUEST["website"];
+        if (!empty($website)) {
+            echo "Website: " . $website . "<br>";
+        }
+    }
+
+    // Comment (optional)
+    if (isset($_POST["comment"])) {
+        $comment = $_REQUEST["comment"];
+        if (!empty($comment)) {
+            echo "Comment: " . $comment . "<br>";
+        }
+    }
+
+    // Gender Validation using isset and strlen
+    if (isset($_POST["gender"])) {
+        $gender = $_POST["gender"];
+        if (strlen($gender) == 0 || empty($gender)) {
+            $genderErr = "Gender is required";
+        } else {
+            echo "Gender: " . $gender . "<br>";
+        }
+    } else {
+        $genderErr = "Please select a gender";
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PHP Form Validation Example</title>
+    <style>
+        .error { color: red; }
+        body { font-family: Arial; }
+        .form-box {
+            border: 2px dashed #999;
+            padding: 20px;
+            width: 400px;
+        }
+        input[type=text], textarea {
+            width: 250px;
+            padding: 4px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-box">
+    <h3>PHP Form Validation Example</h3>
+    <p><span class="error">* required field</span></p>
+
+    <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+
+        <!-- Name Field -->
+        Name: <input type="text" name="name" value="<?php echo $name; ?>">
+        <span class="error">* <?php echo $nameErr; ?></span><br><br>
+
+        <!-- Email Field -->
+        E-mail: <input type="text" name="email" value="<?php echo $email; ?>">
+        <span class="error">* <?php echo $emailErr; ?></span><br><br>
+
+        <!-- Website Field -->
+        Website: <input type="text" name="website" value="<?php echo $website; ?>">
+        <br><br>
+
+        <!-- Comment Field -->
+        Comment: <textarea name="comment" rows="5" cols="30"><?php echo $comment; ?></textarea>
+        <br><br>
+
+        <!-- Gender Field using isset -->
+        Gender:
+        <input type="radio" name="gender" value="Female"
+            <?php if (isset($gender) && $gender == "Female") echo "checked"; ?>> Female
+        <input type="radio" name="gender" value="Male"
+            <?php if (isset($gender) && $gender == "Male") echo "checked"; ?>> Male
+        <input type="radio" name="gender" value="Other"
+            <?php if (isset($gender) && $gender == "Other") echo "checked"; ?>> Other
+        <span class="error">* <?php echo $genderErr; ?></span>
+        <br><br>
+
+        <input type="submit" value="Submit">
+
+    </form>
+</div>
+
+</body>
+</html>
